@@ -7,26 +7,37 @@ function isTouching(a, b) {
    aRect.top + aRect.height < bRect.top ||
    aRect.top > bRect.top + bRect.height ||
    aRect.left + aRect.width < bRect.left ||
-   aRect.left > bRect.left + bRect.width);
-}
+   aRect.left > bRect.left + bRect.width)
+};
 
 const avatar = document.querySelector('#player');
 const coin = document.querySelector('#coin');
 
+// var music = document.getElementById("idAudio");
+// music.play();
+
+// var BGM = new Audio('Collide.mp3');
+// BGM.play();
+
+
 window.addEventListener('keyup', function(e) {
   if(e.key === 'ArrowDown' || e.key === 'Down') {
     moveVertical(avatar, 50);
+    playMusic();
   }
   else if (e.key === 'ArrowUp' || e.key === 'Up') {
     moveVertical(avatar,-50);
+    playMusic();
   }
   else if (e.key === 'ArrowRight' || e.key === 'Right') {
     moveHorizontal(avatar, 50);
     avatar.style.transform = 'scale(1,1)';
+    playMusic();
   }
   else if (e.key === 'ArrowLeft' || e.key === 'Left') {
     moveHorizontal(avatar,-50);
     avatar.style.transform = 'scale(-1,1)';
+    playMusic();
   }
 if (isTouching(avatar, coin)) moveCoin();
 });
@@ -39,6 +50,11 @@ const moveVertical = (element, amount) => {
 const moveHorizontal = (element, amount) => {
   const currLeft = extractPos(element.style.left);
   element.style.left = `${currLeft + amount}px`;
+};
+
+const playMusic = () => {
+  var music = document.getElementById("idAudio");
+  music.play();
 };
 
 const extractPos = (pos) => {
